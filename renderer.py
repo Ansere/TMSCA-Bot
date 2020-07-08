@@ -16,11 +16,11 @@ def latexRender(latexstr):
         plt.text(0, 0, r"$%s$" % lat, fontsize = 50, color = "w")
         plt.xticks(())
         plt.yticks(())
-        owo = io.BytesIO()
-        plt.savefig(owo, bbox_inches = 'tight', verticalalignment = True, facecolor = "#36393F")
+        imgbyte = io.BytesIO()
+        plt.savefig(imgbyte, bbox_inches = 'tight', verticalalignment = True, facecolor = "#36393F")
         plt.close()
-        owo.seek(0)
-        return base64.b64encode(owo.read())
+        imgbyte.seek(0)
+        return base64.b64encode(imgbyte.read())
     except:
         if latexstr == "":
             return "Needs an argument!"
@@ -39,9 +39,8 @@ async def renderfromURL(url, filter):
     im = imgo.invert(im)
     im = im.convert('RGBA')
 
-    data = np.array(im)   # "data" is a height x width x 4 numpy array
-    red, green, blue, alpha = data.T # Temporarily unpack the bands for readability
-    # Replace white with red... (leaves alpha values alone...)
+    data = np.array(im)
+    red, green, blue, alpha = data.T
     black_areas = (red <= filter - 1) & (blue <= filter - 1) & (green <= filter - 1) & (red >= 0) & (blue >= 0) & (green >= 0)# Transpose back needed
     data[..., :-1][black_areas.T] = (54, 57, 63)
     im2 = Image.fromarray(data)
