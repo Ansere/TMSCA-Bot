@@ -11,7 +11,6 @@ from discord.ext import commands
 from inspect import currentframe, getframeinfo
 from dotenv import load_dotenv
 
-
 load_dotenv()
 frameinfo = getframeinfo(currentframe())
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -37,7 +36,7 @@ async def help(ctx, *args):
         array.extend(commands.Bot.get_command(bot, str(com)).aliases)
     if len(args) > 0 and any(args[0] == str(com) for com in array):
         arg = str(bot.get_command(args[0]))
-        if bool(question.QuestionClient.eventDict(arg)):
+        if question.QuestionClient.eventDict(arg) >= 0:
             await ctx.channel.send(embed=embed.embedCommands(arg))
         elif (arg == "check"):
             await ctx.channel.send(embed = embed.checkCommandEmbed())
