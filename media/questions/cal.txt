@@ -1,0 +1,3 @@
+#metadata: 0 - number crunching, 1 - geometry scinot, 2 - geometry integer, 3 - geometry money
+1|1|2003|0, 1.44x10^4, -t 9596 + 4765
+2|1|2003|0, -1.95x10^4, -t 945 - 8616 - 7181 - 4636
