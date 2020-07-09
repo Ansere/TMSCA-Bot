@@ -198,7 +198,8 @@ class QuestionClient:
                 result = events.index(name)
                 return result
             except:
-                return False
+                return -1
+
     @staticmethod
     def fullName(name:str):
         eventabbr = ["ns", "cal", "math", "sci"]
@@ -270,6 +271,3 @@ class Info:
         Info.uniquetests = len(setx)
         setx = set(e.year for e in QuestionClient.questions)
         Info.uniqueyears = len(setx)
-
-
-
